@@ -144,8 +144,9 @@ final class ImageThumbnail implements ImageThumbnailInterface
                 try {
                     $converter = \Pimcore\Document::getInstance();
                     $converter->load($this->asset);
-                    $converter->saveImage($tempFile, $this->page);
-                    $storage->write($cacheFilePath, file_get_contents($tempFile));
+                    if (false !== $converter->saveImage($tempFile, $this->page)) {
+                        $storage->write($cacheFilePath, file_get_contents($tempFile));
+                    }
                 } finally {
                     $lock->release();
                 }
