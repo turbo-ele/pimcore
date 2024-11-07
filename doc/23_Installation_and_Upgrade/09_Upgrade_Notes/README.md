@@ -2,6 +2,7 @@
 ## Pimcore 11.5.0
 ### [Events]
 - `context` property of `ResolveUploadTargetEvent` is deprecated. Use `setArgument()` method instead.
+- `pimcore_block` Twig extension is deprecated. Use `pimcoreblock` or `pimcoremanualblock` instead.
 
 ## Pimcore 11.5.0
 ### General
