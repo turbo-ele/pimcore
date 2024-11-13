@@ -8,7 +8,7 @@ which are not stored as an asset inside Pimcore.
 
 > **IMPORTANT**  
 > Use Imagick PECL extension for best results, GDlib is just a fallback with limited functionality
-> (only PNG, JPG, GIF) and less quality!
+> (only PNG, JPG, GIF) and less quality! If Imagick is available it will be the default, otherwise falling back to GD.
 > Using ImageMagick Pimcore can support hundreds of formats including: AI, EPS, TIFF, PNG, JPG, GIF, PSD, etc.
 > Not all formats are allowed out of the box. To extend the list [see](./README.md#allowed-formats).
 
@@ -507,3 +507,18 @@ pimcore:
             thumbnails:
                 auto_formats: null
 ```
+
+## Manually specify the used image processing adapter (Imagick or GD)
+It is possible to manually specify the used image processing adapter by Pimcore. 
+You can choose from `Imagick` or `GD`, the default is auto-detected, based on the availability of `imagick` PECL extension. 
+It is also possible to implement your own adapter, by implementing `Pimcore\Image\AdapterInterface`.
+
+To specify the used image adapter, please use the following service configuration: 
+
+```yaml
+services: 
+    Pimcore\Image\AdapterInterface:
+        alias: Pimcore\Image\Adapter\GD
+        public: true
+```
+Please be aware that the adapter service needs to be public. 
