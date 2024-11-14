@@ -829,6 +829,9 @@ abstract class AbstractObject extends Model\Element\AbstractElement
 
     public function setIndex(int $index): static
     {
+        if ($index !== $this->index) {
+            $this->markFieldDirty('index');
+        }
         $this->index = $index;
 
         return $this;
